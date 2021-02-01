@@ -251,6 +251,9 @@
                     alert('종목을 입력해주세요');
                     return;
                 }
+                
+                // 모바일 키보드를 없앤다.
+                $('#txtSearch').blur();
 
                 setting['stock'] = word.toUpperCase();
 
@@ -260,6 +263,7 @@
                 
                 if(ret==false) {
                     alert(word + '에 대한 검색결과가 없습니다.');
+                    $('#txtSearch').focus();
                 }
             });
 
@@ -277,9 +281,6 @@
                     //$('#txtMarket').text('ALL');
                     //setting['market']='all'
                 }
-                
-                // 모바일 키보드를 없앤다.
-                $(this).blur();
             });
 
             // 앤터키 처리
