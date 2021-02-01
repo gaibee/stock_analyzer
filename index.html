@@ -255,8 +255,12 @@
                 setting['stock'] = word.toUpperCase();
 
                 // csv에서 찾자!
-                displayResult('kospi_1y');
-                displayResult('kospi_1m');
+                ret = displayResult('kospi_1y');
+                ret = displayResult('kospi_1m');
+                
+                if(ret==false) {
+                    alert(word + '에 대한 검색결과가 없습니다.');
+                }
             });
 
             // 시장 선택 버튼 클릭
@@ -273,6 +277,9 @@
                     //$('#txtMarket').text('ALL');
                     //setting['market']='all'
                 }
+                
+                // 모바일 키보드를 없앤다.
+                $(this).blur();
             });
 
             // 앤터키 처리
@@ -398,8 +405,10 @@
                     // detail 갱신
                     $('#txtDetailMarket').text(setting['market']);
                     $('#txtDetailStock').text(setting['stock']);
+                    
+                    return true;
                 } else {
-                    alert(word + '에 대한 검색결과가 없습니다.');
+                    return false;
                 }
             }
         </script>
