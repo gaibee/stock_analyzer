@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Bootstrap</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        />
+
+        <!-- Python의 Pandas와 같은 기능 -->
+        <script src="https://cdn.jsdelivr.net/npm/danfojs@0.1.2/dist/index.min.js"></script>
+    </head>
+    <body>
+        <div class="p-1 bg-dark-sky"></div>
+
+        <nav class="navbar navbar-light bg-sky mb-3">
+            <a class="navbar-brand text-white font-weight-bold" href="#"
+                ><i class="fas fa-money-bill-wave-alt mr-2"></i>주식 상관관계 분석</a
+            >
+        </nav>
+
+        <div class="container">
+            <div class="update h6 font-weight-bold">
+                <span class="text-danger">최근 업데이트 날짜</span> : 2021-02-01
+            </div>
+
+            <hr />
+            <!-- 종목 선택 -->
+            <div class="select_market mb-3">
+                <div class="btn-group d-flex justify-content-center" id="grpbtnMarket" role="group">
+                    <button type="button" class="btn bg-green text-white">KOSPI</button>
+                    <button type="button" class="btn bg-green text-white">KOSDAQ</button>
+                    <button type="button" class="btn bg-green text-white">ALL</button>
+                </div>
+                <h3 class="p-2 text-center" id="txtMarket">
+                    KOSPI
+                </h3>
+            </div>
+
+            <hr />
+
+            <!-- 종목 검색 -->
+            <div class="search mb-3">
+                <h6 class="h6">
+                    종목검색
+                </h6>
+                <div class="input-group mb-3">
+                    <input type="text" id="txtSearch" class="form-control" placeholder="삼성전자" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" id="btnSearch" type="button">
+                            검색
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- 로딩바 -->
+            <div class="loading">
+                <div class="progress mb-3">
+                    <div
+                        class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        aria-valuenow="100"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width: 100%;"
+                    ></div>
+                </div>
+                <h5 class="text-center" id="txtLoading">
+                    KOSPI 관계도 가져오는 중...
+                </h5>
+            </div>
+
+            <!-- 결과 화면 출력 -->
+            <div class="result mb-3">
+                <!-- 정보 설명 -->
+                <div class="result-detail text-center mb-3">
+                    <h6>
+                        <span id="txtDetailMarket" class="text-danger">KOSPI</span>에서
+                        <span id="txtDetailStock" class="text-success font-weight-bold"
+                            >삼성전자</span
+                        >
+                        분석 결과
+                    </h6>
+                </div>
+
+                <!-- 1년 연관관계 best 10 종목-->
+                <div class="year-best-10 mb-5">
+                    <h5 class="bg-sky p-1 text-white">
+                        1년간 상관관계 best 10 목록
+                    </h5>
+                    <table class="table table-striped" id="year-best-10-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">종목명</th>
+                                <th scope="col">상관계수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 1달 연관관계 best 5 종목-->
+                <div class="month-best-10 mb-5">
+                    <h5 class="bg-sky p-1 text-white">
+                        1달간 상관관계 best 10 목록
+                    </h5>
+                    <table class="table table-striped" id="month-best-10-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">종목명</th>
+                                <th scope="col">상관계수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            let setting = {
+                'market':'KOSPI',
+                'stock':'삼성전자'
+            }
+            
+            let g_dic_loaded_csv = {
+                'kospi_1y' : false,
+                'kospi_1m' : false,
+                'kosdaq_1y' : false,
+                'kosdaq_1m' : false
+            }
+            
+            let g_dic_csv = {
+                'kospi_1y' : '',
+                'kospi_1m' : '',
+                'kosdaq_1y' : '',
+                'kosdaq_1m' : ''
+            }
+
+            loading(true);
+
+            // CSV를 미리 불러온다.
+            AsyncloadCSV(['kospi_1y', 'kospi_1m'])
+
+            // 버튼 연결
+            $('#btnSearch').click(function () {
+                // 검색을 아무것도 입력 안할시 입력 요구
+                word = $('#txtSearch').val();
+                if (word == '') {
+                    alert('종목을 입력해주세요');
+                    return;
+                }
+
+                setting['stock'] = word.toUpperCase();
+
+                // csv에서 찾자!
+                displayResult('kospi_1y');
+                displayResult('kospi_1m');
+
+            });
+            
+            // 시장 선택 버튼 클릭
+            $('#grpbtnMarket button').click(function() {
+                if($(this).index()==0) {
+                    $('#txtMarket').text('KOSPI');
+                    setting['market']='KOSPI'
+                } else if($(this).index()==1) {
+                    alert('아직 구현 안됨 ㅠㅠ');
+                    //$('#txtMarket').text('KOSDAQ');
+                    //setting['market']='kosdaq'
+                } else {
+                    alert('아직 구현 안됨 ㅠㅠ');
+                    //$('#txtMarket').text('ALL');
+                    //setting['market']='all'
+                }
+            })
+
+            // 앤터키 처리
+            $('#txtSearch').keydown(function (key) {
+                if (key.keyCode == 13) {
+                    $('#btnSearch').click();
+                }
+            });
+
+            // 로딩 그래프를 보여줄 지말지 설정
+            function loading(isLoading) {
+                if (isLoading == true) {
+                    // 로딩상태라면 상태바를 보이고 result를 없앤다.
+                    $('.loading').css('display', 'block');
+                    $('.result').css('display', 'none');
+                    $('#btnSearch').attr('disabled', true);
+                } else {
+                    $('.loading').css('display', 'none');
+                    $('.result').css('display', 'block');
+                    $('#btnSearch').attr('disabled', false);
+                }
+            }
+            
+            function loadCSV(date_market, arr, path) {
+                dfd.read_csv(path).then(function (data) {
+                    g_dic_csv[date_market] = data;
+                    g_dic_csv[date_market].set_index({ key: 'stock', inplace: true });
+                    console.log(date_market + ' clear')
+
+                    if(date_market=='kospi_1y') {
+                        g_dic_loaded_csv['kospi_1y']=true;
+                    } else if(date_market=='kospi_1m') {
+                        g_dic_loaded_csv['kospi_1m']=true;
+                    } else if(date_market=='kosdaq_1y') {
+                        g_dic_loaded_csv['kosdaq_1y']=true;
+                    } else if(date_market=='kosdaq_1m') {
+                        g_dic_loaded_csv['kosdaq_1m']=true;
+                    }
+
+                    console.log('g_dic_loaded_csv : ')
+                    console.log(g_dic_loaded_csv)
+
+                    is_all_clear = true;
+                    for(var t in arr) {
+                        is_all_clear = is_all_clear && g_dic_loaded_csv[arr[t]];
+                    }
+
+                    console.log('is_all_clear : ')
+                    console.log(is_all_clear)
+
+                    if(is_all_clear==true) {
+                        loading(false);
+
+                        // 첫 번째니까 삼성전자 검색결과를 보여주자
+                        setting['makret']='KOSPI'
+                        setting['stock']='삼성전자'
+                        
+                        for(var t in arr) {
+                            displayResult(arr[t])
+                        }
+                    }
+                });
+            }
+            
+            function AsyncloadCSV(arr) {
+                for(var i in arr) {
+                    
+                    let path = ''
+                    
+                    if(arr[i]=='kospi_1y') {
+                        path = 'files/correlation_kospi_20200201.csv'
+                    } else if(arr[i]=='kospi_1m') {
+                        path = 'files/correlation_kospi_20201220.csv'
+                    } else if(arr[i]=='kosdaq_1y') {
+                    } else if(arr[i]=='kosdaq_1m') {
+                    }
+
+                    loadCSV(arr[i], arr, path);
+                }
+            }
+            
+
+            // 검색 결과 출력하기
+            function displayResult(date_market) {
+                // 검색어가 종목에 있는지 확인
+                columns = g_dic_csv[date_market].columns;
+                if (columns.includes(setting['stock'])) {
+                    df = g_dic_csv[date_market][setting['stock']];
+
+                    // 정렬을 위한 함수
+                    const dsu = (arr1, arr2) =>
+                        arr1
+                            .map((item, index) => [arr2[index], item])
+                            .sort(([arg1], [arg2]) => arg2 - arg1);
+
+                    sorted = dsu(df.index, df.values);
+                    
+                    let date_type = ''
+                    if(date_market=='kospi_1y') {
+                        date_type='year';
+                    }else if(date_market=='kospi_1m') {
+                        date_type='month';
+                    }
+
+                    for (i = 1; i < 11; i++) {
+                        stock_name = sorted[i][1];
+                        stock_corr = sorted[i][0];
+
+                        $('#' + date_type + '-best-10-table tbody tr:nth-child(' + parseInt(i) + ') th').text(
+                            stock_name
+                        );
+                        $('#' + date_type + '-best-10-table tbody tr:nth-child(' + parseInt(i) + ') td').text(
+                            stock_corr
+                        );
+                    }
+                    
+                    // detail 갱신
+                    $('#txtDetailMarket').text(setting['market']);
+                    $('#txtDetailStock').text(setting['stock']);
+
+                    
+                } else {
+                    alert(word + '에 대한 검색결과가 없습니다.');
+                }
+            }
+        </script>
+    </body>
+</html>

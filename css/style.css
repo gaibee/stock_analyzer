@@ -1,0 +1,16 @@
+.title {
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.bg-sky {
+    background-color: #03A9F4!important;
+}
+
+.bg-dark-sky {
+    background-color: #0288D1!important;
+}
+
+.bg-green {
+    background-color: #009688!important;
+}
